@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+
+  "name": "Highlight Words From Txt File",
+  "description": "In linksAndWords.js, add in links(links are not tabbed) and words(words are tabbed). Each link and word is on its own line",
+  "version": "1.0",
+
+  "icons": {
+    "48": "highlight.png"
+  },
+
+  "background":
+  {
+    "scripts": ["jquery.min.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_script.js"]
+    }
+  ],
+
+  "web_accessible_resources": [
+    "scriptToAppendToDom.js",
+    "linksAndWords.txt"
+  ]
+}
