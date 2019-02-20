@@ -9,11 +9,6 @@
     "48": "highlight.png"
   },
 
-  "background":
-  {
-    "scripts": ["jquery.min.js"]
-  },
-
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

@@ -1,21 +1,27 @@
-$(document).ready(function() {
-    var words = JSON.parse($('#wordsToHighlight').attr('words'));
-    for (var i in words) {
-        highLightInDom(words[i]);
-    }
-});
+(
+    function () {
+        var div1 = document.getElementById('wordsToHighlight');
+        if(div1 !== null) {
+            var words = JSON.parse(div1.getAttribute('words'));
+            for (var i in words) {
+                doSearch(words[i], 'yellow');
+            }
+            setTimeout(function(){
+                window.scrollTo({ top: 0 });
+            },200);
+        }
 
-function highLightInDom(word){
-    var $wordInDom = $(':contains("' + word + '"):not(:has(div, p))');
-    if ($wordInDom.length) {
-        $wordInDom.each(function(){
-            var orgText = $(this).html();
-            orgText = replaceAll(orgText, word);
-            $(this).html(orgText);
-        });
-    }
-}
+        function doSearch(text, backgroundColor) {
+            if (window.find && window.getSelection) {
+                document.designMode = "on";
+                var sel = window.getSelection();
+                sel.collapse(document.body, 0);
 
-function replaceAll(orgText, search) {
-    return orgText.replace(new RegExp(search, 'g'), "<span style='background-color: yellow;'>" + search + "</span>");
-}
+                while (window.find(text)) {
+                    document.execCommand("HiliteColor", false, backgroundColor);
+                    sel.collapseToEnd();
+                }
+                document.designMode = "off";
+            }
+        }
+})();
